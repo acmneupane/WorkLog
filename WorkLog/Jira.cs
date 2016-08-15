@@ -32,7 +32,7 @@ namespace WorkLog
                     string url = "http://jira.codebee.dk:8080/rest/api/latest";
                     Uri myUri = new Uri(url, UriKind.Absolute);
                     client.BaseAddress = myUri;
-                    var byteArray = Encoding.ASCII.GetBytes("ane:kangaroo");
+                    var byteArray = Encoding.ASCII.GetBytes("username:password");
                     var header = new AuthenticationHeaderValue(
                                "Basic", Convert.ToBase64String(byteArray));
                     client.DefaultRequestHeaders.Authorization = header;
@@ -68,15 +68,18 @@ namespace WorkLog
                                 linenum++;
                             }
                         }
-                        File.Delete(@"D:\WorkLog.txt");
+                        if(File.Exists(@"C:\WorkLog.txt"))
+                        {
+                            File.Delete(@"C:\WorkLog.txt");
+                        }
                         file.Close();
-                        File.WriteAllLines(@"D:\WorkLog.txt", numlines);
-                        Console.WriteLine("Succesfully listed in D:Worklog.txt.");
+                        File.WriteAllLines(@"C:\WorkLog.txt", numlines);
+                        Console.WriteLine("Succesfully listed in C:Worklog.txt.");
                     }
                 }
                 catch (HttpRequestException)
                 {
-                    Console.WriteLine("COnnection Error");
+                    Console.WriteLine("Connection Error");
                 }
                 catch (Exception)
                 {

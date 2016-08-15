@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace WorkLog
 {
-
     public class SendEmail
     {
-
         public int Worklog()
         {
             Console.WriteLine("");
@@ -21,26 +19,26 @@ namespace WorkLog
             if (execute[0] == 'Y' || execute[0] == 'y')
             {
                 var message = new MailMessage();
-                message.To.Add(new MailAddress("developer@codebee.dk"));
-                message.From = new MailAddress("ane@codebee.dk", "Aseem");
+                message.To.Add(new MailAddress("emailTo@address.com"));
+                message.From = new MailAddress("emailFrom@address.com", "Name");
                 var date = String.Format("{0:MMM d, yyyy}", DateTime.Now);
                 message.Subject = "Work Log for: " + date;
-                if (!File.Exists(@"D:\WorkLog.txt"))
+                if (!File.Exists(@"C:\WorkLog.txt"))
                 {
                     return 2;
                 }
                 else
                 {
-                    message.Body = File.ReadAllText(@"D:\WorkLog.txt");
+                    message.Body = File.ReadAllText(@"C:\WorkLog.txt");
                 }
 
                 message.IsBodyHtml = true;
 
                 using (var smtp = new SmtpClient())
                 {
-                    SmtpClient client = new SmtpClient("smtp.codebee.dk", 587);
+                    SmtpClient client = new SmtpClient("smtpaddress", 123);
                     client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential("ane@codebee.dk", "oopahQu2");
+                    client.Credentials = new NetworkCredential("username", "password");
                     client.EnableSsl = false;
                     try
                     {
@@ -87,7 +85,7 @@ namespace WorkLog
                     }
                 case 2:
                     {
-                        Console.WriteLine("Issues not listed in D:/Worklog.text.");
+                        Console.WriteLine("Issues not listed in C:/Worklog.text.");
                         Console.WriteLine("Please, run the program again after listing the issues.");
                         break;
                     }       

@@ -13,6 +13,7 @@ namespace WorkLog
         public int total { get; set; }
     }
 
+
     public class Issue
     {
 
@@ -22,6 +23,7 @@ namespace WorkLog
 
         public Fields fields { get; set; }
     }
+
     public class Fields
     {
         public string summary { get; set; }

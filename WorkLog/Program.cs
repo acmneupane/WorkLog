@@ -12,7 +12,6 @@ using RestSharp;
 
 namespace WorkLog
 {
-    
     class Program
     {
         public static void Main(string[] args)
