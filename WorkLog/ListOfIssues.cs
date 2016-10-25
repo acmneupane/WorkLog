@@ -13,7 +13,6 @@ namespace WorkLog
         public int total { get; set; }
     }
 
-
     public class Issue
     {
 
@@ -27,6 +26,20 @@ namespace WorkLog
     public class Fields
     {
         public string summary { get; set; }
+        public Timetracking timetracking { get; set; }
+        public Status status { get; set; }
     }
-
+    public class Timetracking
+    {
+        public string originalEstimate { get; set; }
+        public string remainingEstimate { get; set; }
+        public string timeSpent { get; set; }
+        public long originalEstimateSeconds { get; set; }
+        public long remainingEstimateSeconds { get; set; }
+        public long timeSpentSeconds { get; set; }
+    }
+    public class Status
+    {
+        public string name { get; set; }
+    }
 }

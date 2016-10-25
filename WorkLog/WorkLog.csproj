@@ -55,9 +55,11 @@
   <ItemGroup>
     <Compile Include="Jira.cs" />
     <Compile Include="ListOfIssues.cs" />
+    <Compile Include="Today.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendEmail.cs" />
+    <Compile Include="Tomorrow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

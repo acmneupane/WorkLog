@@ -9,36 +9,40 @@ using System.Threading.Tasks;
 
 namespace WorkLog
 {
+
     public class SendEmail
     {
+
         public int Worklog()
         {
             Console.WriteLine("");
             Console.WriteLine("Send WorkLog?? (Type 'Y' or 'y' if YES or Any other Key if NO)");
             string execute = Console.ReadLine();
-            if (execute[0] == 'Y' || execute[0] == 'y')
+            if (execute != null && (execute[0] == 'Y' || execute[0] == 'y'))
             {
                 var message = new MailMessage();
-                message.To.Add(new MailAddress("emailTo@address.com"));
-                message.From = new MailAddress("emailFrom@address.com", "Name");
+                //message.To.Add(new MailAddress("developer@codebee.dk"));
+                //message.CC.Add(new MailAddress("sas@codebee.dk"));
+                message.To.Add(new MailAddress("ane@codebee.dk"));
+                message.From = new MailAddress("ane@codebee.dk", "Aseem");
                 var date = String.Format("{0:MMM d, yyyy}", DateTime.Now);
                 message.Subject = "Work Log for: " + date;
-                if (!File.Exists(@"C:\WorkLog.txt"))
+                if (!File.Exists(@"D:\New.txt"))
                 {
                     return 2;
                 }
                 else
                 {
-                    message.Body = File.ReadAllText(@"C:\WorkLog.txt");
+                    message.Body = File.ReadAllText(@"D:\New.txt");
                 }
 
                 message.IsBodyHtml = true;
 
                 using (var smtp = new SmtpClient())
                 {
-                    SmtpClient client = new SmtpClient("smtpaddress", 123);
+                    SmtpClient client = new SmtpClient("smtp.codebee.dk", 587);
                     client.UseDefaultCredentials = false;
-                    client.Credentials = new NetworkCredential("username", "password");
+                    client.Credentials = new NetworkCredential("ane@codebee.dk", "oopahQu2");
                     client.EnableSsl = false;
                     try
                     {
@@ -85,7 +89,7 @@ namespace WorkLog
                     }
                 case 2:
                     {
-                        Console.WriteLine("Issues not listed in C:/Worklog.text.");
+                        Console.WriteLine("Issues not listed in D:/New.text.");
                         Console.WriteLine("Please, run the program again after listing the issues.");
                         break;
                     }       
