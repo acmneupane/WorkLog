@@ -16,23 +16,28 @@ namespace WorkLog
     {
         public static void Main(string[] args)
         {
-            Today todayIssues = new Today();
-            var fileContents = todayIssues.IssuesForToday();
-            Tomorrow tomorrow = new Tomorrow();
-            tomorrow.IssuesForTomorrow(ref fileContents);
-            fileContents = fileContents.Replace("\r\n\r\n", "<br />");
-            if (File.Exists(@"D:\New.txt"))
+            Console.WriteLine("");
+            Console.WriteLine("List your issues?? (Type 'Y' or 'y' if YES or Any other Key if NO)");
+            string execute = Console.ReadLine();
+            if (execute != null && (execute[0] == 'Y' || execute[0] == 'y'))
             {
-                File.Delete(@"D:\New.txt");
+                Today todayIssues = new Today();
+                var fileContents = todayIssues.IssuesForToday();
+                Tomorrow tomorrow = new Tomorrow();
+                tomorrow.IssuesForTomorrow(ref fileContents);
+                fileContents = fileContents.Replace("\r\n\r\n", "<br />");
+                if (File.Exists(@"D:\New.txt"))
+                {
+                    File.Delete(@"D:\New.txt");
+                }
+                if (File.Exists(@"D:\New.html"))
+                {
+                    File.Delete(@"D:\New.html");
+                }
+                File.WriteAllText(@"D:\New.txt", fileContents);
+                File.WriteAllText(@"D:\New.html", fileContents);
+                Console.WriteLine("Verify the file in D:/New.txt");
             }
-            if (File.Exists(@"D:\New.html"))
-            {
-                File.Delete(@"D:\New.html");
-            }
-            File.WriteAllText(@"D:\New.txt", fileContents);
-            File.WriteAllText(@"D:\New.html", fileContents);
-            Console.WriteLine("Verify the file in D:/New.txt");
-            Console.ReadLine();
             SendEmail send = new SendEmail();
             send.SendMail();
         }

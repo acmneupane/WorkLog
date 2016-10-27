@@ -57,6 +57,9 @@ namespace WorkLog
             if (spentTime <= originalTime)
             {
                 completed = ((int)(remainingTime / originalTime) / 100).ToString();
+            }
+            if(remainingTime != 0 && remainingTime <= originalTime)
+            {
                 remaining = issue.fields.timetracking.remainingEstimate;
             }
             fileContents = fileContents.Replace("In Progress Task Complete % - ", "In Progress Task Complete % - " + completed);

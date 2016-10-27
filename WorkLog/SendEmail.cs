@@ -21,9 +21,8 @@ namespace WorkLog
             if (execute != null && (execute[0] == 'Y' || execute[0] == 'y'))
             {
                 var message = new MailMessage();
-                //message.To.Add(new MailAddress("developer@codebee.dk"));
-                //message.CC.Add(new MailAddress("sas@codebee.dk"));
-                message.To.Add(new MailAddress("ane@codebee.dk"));
+                message.To.Add(new MailAddress("developer@codebee.dk"));
+                message.CC.Add(new MailAddress("sas@codebee.dk"));
                 message.From = new MailAddress("ane@codebee.dk", "Aseem");
                 var date = String.Format("{0:MMM d, yyyy}", DateTime.Now);
                 message.Subject = "Work Log for: " + date;
