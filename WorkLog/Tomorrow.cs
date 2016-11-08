@@ -10,7 +10,7 @@ namespace WorkLog
     {
         public void IssuesForTomorrow(ref string fileContents)
         {
-            string tomorrowquery = "http://www.jira.codebee.dk:8080/rest/api/latest/search?jql=status%20in%20%28%22To%20Do%22%2C%22Backlog%22%29%26assignee%3Daseem";
+            string tomorrowquery = "http://www.jira.codebee.dk:8080/rest/api/latest/search?jql=status%20in%20%28%22To%20Do%22%2C%22In%20Progress%22%2C%22Backlog%22%29%26assignee%3Daseem";
             var issues = new Jira().JiraAccess(tomorrowquery);
             if(issues != null)
             {
