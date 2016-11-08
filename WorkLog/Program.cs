@@ -25,7 +25,7 @@ namespace WorkLog
                 var fileContents = todayIssues.IssuesForToday();
                 Tomorrow tomorrow = new Tomorrow();
                 tomorrow.IssuesForTomorrow(ref fileContents);
-                fileContents = fileContents.Replace("\r\n\r\n", "<br />");
+                fileContents = fileContents.Replace("\r\n\r\n", "");
                 if (File.Exists(@"D:\New.txt"))
                 {
                     File.Delete(@"D:\New.txt");

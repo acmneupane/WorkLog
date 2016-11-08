@@ -25,9 +25,9 @@ namespace WorkLog
 
         public string AddTodayTask(ListOfIssues listOfIssues, string fileContents)
         {
-            string assigned = "My Assigned Tasks - <br /> <ul>";
+            string assigned = "My Assigned Tasks - <ul>";
             string progress = "In Progress Task - ";
-            string done = "Done Task - ";
+            string done = "Done Task - <ul>";
 
             foreach (var issue in listOfIssues.issues.ToList())
             {
@@ -39,10 +39,11 @@ namespace WorkLog
                 }
                 else if (issue.fields.status.name == "In Review" || issue.fields.status.name == "Ready for review" || issue.fields.status.name == "QA Pass" || issue.fields.status.name == "Done")
                 {
-                    done += issue.key;
+                    done += "<li>" + issue.key + "</li>";
                 }
             }
             assigned += "</ul>";
+            done += "</ul>";
             fileContents = fileContents.Replace("My Assigned Tasks - ", assigned).Replace("Done Task - ", done).Replace("In Progress Task - ", progress);
             return fileContents;
         }
@@ -56,7 +57,8 @@ namespace WorkLog
             var remaining = "";
             if (spentTime <= originalTime)
             {
-                completed = ((int)(remainingTime / originalTime) / 100).ToString();
+                var perce = (spentTime *100) /originalTime;
+                completed = perce.ToString();
             }
             if(remainingTime != 0 && remainingTime <= originalTime)
             {
