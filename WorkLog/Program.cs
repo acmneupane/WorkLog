@@ -26,17 +26,17 @@ namespace WorkLog
                 Tomorrow tomorrow = new Tomorrow();
                 tomorrow.IssuesForTomorrow(ref fileContents);
                 fileContents = fileContents.Replace("\r\n\r\n", "");
-                if (File.Exists(@"D:\New.txt"))
-                {
-                    File.Delete(@"D:\New.txt");
-                }
+                //if (File.Exists(@"D:\New.txt"))
+                //{
+                //    File.Delete(@"D:\New.txt");
+                //}
                 if (File.Exists(@"D:\New.html"))
                 {
                     File.Delete(@"D:\New.html");
                 }
-                File.WriteAllText(@"D:\New.txt", fileContents);
+                //File.WriteAllText(@"D:\New.txt", fileContents);
                 File.WriteAllText(@"D:\New.html", fileContents);
-                Console.WriteLine("Verify the file in D:/New.txt");
+                Console.WriteLine("Verify the file in D:/New.html");
             }
             SendEmail send = new SendEmail();
             send.SendMail();

@@ -23,6 +23,7 @@ namespace WorkLog
                 var message = new MailMessage();
                 message.To.Add(new MailAddress("developer@codebee.dk"));
                 message.CC.Add(new MailAddress("sas@codebee.dk"));
+                //message.To.Add(new MailAddress("ane@codebee.dk"));
                 message.From = new MailAddress("ane@codebee.dk", "Aseem");
                 var date = String.Format("{0:MMM d, yyyy}", DateTime.Now);
                 message.Subject = "Work Log for: " + date;
@@ -32,7 +33,7 @@ namespace WorkLog
                 }
                 else
                 {
-                    message.Body = File.ReadAllText(@"D:\New.txt");
+                    message.Body = File.ReadAllText(@"D:\New.html");
                 }
 
                 message.IsBodyHtml = true;
