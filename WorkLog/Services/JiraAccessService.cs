@@ -9,12 +9,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using WorkLog.Models;
 
-namespace WorkLog
+namespace WorkLog.Services
 {
-    public class Jira
+    public class JiraAccessService
     {
-
         public ListOfIssues JiraAccess(string jql)
         {
             try

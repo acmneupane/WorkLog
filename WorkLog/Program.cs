@@ -1,14 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Atlassian;
-using Atlassian.Jira;
-using RestSharp;
+using WorkLog.Components;
+using WorkLog.Services;
 
 namespace WorkLog
 {
@@ -16,30 +8,24 @@ namespace WorkLog
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("");
-            Console.WriteLine("List your issues?? (Type 'Y' or 'y' if YES or Any other Key if NO)");
-            string execute = Console.ReadLine();
-            if (execute != null && (execute[0] == 'Y' || execute[0] == 'y'))
+            var allIssues = new JiraIssues().ListIssues();
+
+            var readWriteFileService = new ReadWriteFileService();
+            readWriteFileService.WriteFileToHtml(allIssues.FileContents); //Write contents to File
+
+            var send = new WorklogEmailService();
+            var isSuccess = send.SendWorklog(); //Send Worklog
+            if (isSuccess)
             {
-                Today todayIssues = new Today();
-                var fileContents = todayIssues.IssuesForToday();
-                Tomorrow tomorrow = new Tomorrow();
-                tomorrow.IssuesForTomorrow(ref fileContents);
-                fileContents = fileContents.Replace("\r\n\r\n", "");
-                //if (File.Exists(@"D:\New.txt"))
-                //{
-                //    File.Delete(@"D:\New.txt");
-                //}
-                if (File.Exists(@"D:\New.html"))
-                {
-                    File.Delete(@"D:\New.html");
-                }
-                //File.WriteAllText(@"D:\New.txt", fileContents);
-                File.WriteAllText(@"D:\New.html", fileContents);
-                Console.WriteLine("Verify the file in D:/New.html");
+                Console.WriteLine("SendWorklog Successfully sent.");
+                Console.WriteLine("Press Enter to Exit.");
+                Console.ReadLine();
             }
-            SendEmail send = new SendEmail();
-            send.SendMail();
+            else
+            {
+                Console.WriteLine("Worklog not sent");
+            }
+            
         }
     }
 }
